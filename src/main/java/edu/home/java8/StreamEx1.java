@@ -29,6 +29,13 @@ public class StreamEx1 {
 		System.out.println(uppercaseNames);
 		uppercaseNames.clear();
 		
+		System.out.println("*************");
+		friends.stream()
+    //.map(name->name.toUpperCase())
+    .forEach(name-> uppercaseNames.add(name.toUpperCase()));
+    System.out.println(uppercaseNames);
+    uppercaseNames.clear();
+		
 		//Using Lambda, forEach(), map() method in Stream interface, Method reference in Java 8
 		friends.stream()
 		.map(String::toUpperCase)
