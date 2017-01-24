@@ -1,6 +1,6 @@
 package edu.home.java8;
 
-public class RunnableLambda {
+public class LambdaExpressionEx2 {
 	public static void main(String[] args) {
 		// Anonymous Runnable
 		Runnable r1 = new Runnable() {
