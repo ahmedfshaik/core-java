@@ -13,29 +13,29 @@ import java.util.concurrent.Semaphore;
  * semaphore.
  */
 public class SemaphoreTest {
-	Semaphore binary = new Semaphore(1); //one permit here
-
-	public static void main(String args[]) {
-		final SemaphoreTest test = new SemaphoreTest();
-		ExecutorService threadPool = Executors.newFixedThreadPool(2);
-
-		threadPool.execute(()-> test.mutualExclusion());
-		threadPool.execute(()-> test.mutualExclusion());
-		
-		threadPool.shutdown();
-	}
-
-	private void mutualExclusion() {
-		try {
-			binary.acquire();
-			// mutual exclusive region
-			System.out.println(Thread.currentThread().getName() + " inside mutual exclusive region");
-			Thread.sleep(1000);
-		} catch (InterruptedException ie) {
-			ie.printStackTrace();
-		} finally {
-			binary.release();
-			System.out.println(Thread.currentThread().getName() + " outside of mutual exclusive region");
-		}
-	}
+    Semaphore binary = new Semaphore(1); // one permit here
+    
+    public static void main(final String args[]) {
+        final SemaphoreTest test = new SemaphoreTest();
+        final ExecutorService threadPool = Executors.newFixedThreadPool(2);
+        
+        threadPool.execute(() -> test.mutualExclusion());
+        threadPool.execute(() -> test.mutualExclusion());
+        
+        threadPool.shutdown();
+    }
+    
+    private void mutualExclusion() {
+        try {
+            binary.acquire();
+            // mutual exclusive region
+            System.out.println(Thread.currentThread().getName() + " inside mutual exclusive region");
+            Thread.sleep(1000);
+        } catch (final InterruptedException ie) {
+            ie.printStackTrace();
+        } finally {
+            binary.release();
+            System.out.println(Thread.currentThread().getName() + " outside of mutual exclusive region");
+        }
+    }
 }

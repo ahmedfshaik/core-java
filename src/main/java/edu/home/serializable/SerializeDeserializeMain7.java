@@ -9,7 +9,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 
-
 /*If you already have serializable,why you need externalizable at all!!:
 
 When you serialize any object using serializable, apart from fields, all objects that belong to object map and that can be reached using instance variable will also be serialized .for example :
@@ -22,102 +21,102 @@ While serializing,information about class description which incluses description
 */
 
 public class SerializeDeserializeMain7 {
-
-	public static void main(String[] args) {
-		Employee7 emp = new Employee7();
-		emp.setEmployeeId(101);
-		emp.setEmployeeName("Arpit");
-		emp.setDepartment("CS");
-
-		// Serialize
-		try {
-			FileOutputStream fileOut = new FileOutputStream("employee.ser");
-			ObjectOutputStream outStream = new ObjectOutputStream(fileOut);
-			outStream.writeObject(emp);
-			outStream.close();
-			fileOut.close();
-		} catch (IOException i) {
-			i.printStackTrace();
-		}
-
-		// Deserialize
-		emp = null;
-		try {
-			FileInputStream fileIn = new FileInputStream("employee.ser");
-			ObjectInputStream in = new ObjectInputStream(fileIn);
-			emp = (Employee7) in.readObject();
-			in.close();
-			fileIn.close();
-		} catch (IOException i) {
-			i.printStackTrace();
-			return;
-		} catch (ClassNotFoundException c) {
-			System.out.println("Employee class not found");
-			c.printStackTrace();
-			return;
-		}
-		System.out.println("Deserialized Employee...");
-		System.out.println("Emp id: " + emp.getEmployeeId());
-		System.out.println("Name: " + emp.getEmployeeName());
-
-	}
-
+    
+    public static void main(final String[] args) {
+        Employee7 emp = new Employee7();
+        emp.setEmployeeId(101);
+        emp.setEmployeeName("Arpit");
+        emp.setDepartment("CS");
+        
+        // Serialize
+        try {
+            final FileOutputStream fileOut = new FileOutputStream("employee.ser");
+            final ObjectOutputStream outStream = new ObjectOutputStream(fileOut);
+            outStream.writeObject(emp);
+            outStream.close();
+            fileOut.close();
+        } catch (final IOException i) {
+            i.printStackTrace();
+        }
+        
+        // Deserialize
+        emp = null;
+        try {
+            final FileInputStream fileIn = new FileInputStream("employee.ser");
+            final ObjectInputStream in = new ObjectInputStream(fileIn);
+            emp = (Employee7) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (final IOException i) {
+            i.printStackTrace();
+            return;
+        } catch (final ClassNotFoundException c) {
+            System.out.println("Employee class not found");
+            c.printStackTrace();
+            return;
+        }
+        System.out.println("Deserialized Employee...");
+        System.out.println("Emp id: " + emp.getEmployeeId());
+        System.out.println("Name: " + emp.getEmployeeName());
+        
+    }
+    
 }
 
 class Employee7 implements Externalizable {
-
-	int employeeId;
-	String employeeName;
-	String department;
-	String nationality;
-
-	public Employee7() {
-
-	}
-
-	public int getEmployeeId() {
-		return employeeId;
-	}
-
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
-	}
-
-	public String getEmployeeName() {
-		return employeeName;
-	}
-
-	public void setEmployeeName(String employeeName) {
-		this.employeeName = employeeName;
-	}
-
-	public String getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(String department) {
-		this.department = department;
-	}
-
-	public String getNationality() {
-		return nationality;
-	}
-
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
-	}
-
-	@Override
-	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-		employeeId = in.readInt();
-		employeeName = (String) in.readObject();
-
-	}
-
-	@Override
-	public void writeExternal(ObjectOutput out) throws IOException {
-
-		out.writeInt(employeeId);
-		out.writeObject(employeeName);
-	}
+    
+    int employeeId;
+    String employeeName;
+    String department;
+    String nationality;
+    
+    public Employee7() {
+        
+    }
+    
+    public int getEmployeeId() {
+        return employeeId;
+    }
+    
+    public void setEmployeeId(final int employeeId) {
+        this.employeeId = employeeId;
+    }
+    
+    public String getEmployeeName() {
+        return employeeName;
+    }
+    
+    public void setEmployeeName(final String employeeName) {
+        this.employeeName = employeeName;
+    }
+    
+    public String getDepartment() {
+        return department;
+    }
+    
+    public void setDepartment(final String department) {
+        this.department = department;
+    }
+    
+    public String getNationality() {
+        return nationality;
+    }
+    
+    public void setNationality(final String nationality) {
+        this.nationality = nationality;
+    }
+    
+    @Override
+    public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+        employeeId = in.readInt();
+        employeeName = (String) in.readObject();
+        
+    }
+    
+    @Override
+    public void writeExternal(final ObjectOutput out) throws IOException {
+        
+        out.writeInt(employeeId);
+        out.writeObject(employeeName);
+    }
 }

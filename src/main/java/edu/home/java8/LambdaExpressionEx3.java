@@ -6,23 +6,23 @@ import java.util.Comparator;
 import java.util.List;
 
 public class LambdaExpressionEx3 {
-
-    public static void main(String[] args) {
-        List<Customer> custs = new ArrayList<Customer>();
+    
+    public static void main(final String[] args) {
+        final List<Customer> custs = new ArrayList<>();
         custs.add(new Customer(2, "abc"));
         custs.add(new Customer(1, "xyz"));
         custs.add(new Customer(3, "pqr"));
-
+        
         // annonymous comparator
         Collections.sort(custs, new Comparator<Customer>() {
-
+            
             @Override
-            public int compare(Customer c1, Customer c2) {
+            public int compare(final Customer c1, final Customer c2) {
                 return c1.getCid().compareTo(c2.getCid());
             }
         });
         System.out.println(custs.toString());
-
+        
         // lambda comparator
         // Collections.sort(custs, (Customer c1, Customer c2)->
         // c1.getCname().compareTo(c2.getCname()));
@@ -33,23 +33,24 @@ public class LambdaExpressionEx3 {
 }
 
 class Customer {
-
-    private int cid;
-    private String cname;
-
-    Customer(int cid, String cname) {
+    
+    private final int cid;
+    private final String cname;
+    
+    Customer(final int cid, final String cname) {
         this.cid = cid;
         this.cname = cname;
     }
-
+    
     public Integer getCid() {
         return cid;
     }
-
+    
     public String getCname() {
         return cname;
     }
-
+    
+    @Override
     public String toString() {
         return cid + " " + cname;
     }
